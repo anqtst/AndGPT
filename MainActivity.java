@@ -38,10 +38,10 @@ Button btnFetch,btnClr,btnZm;
 TextView outputText;
 
 String res="",reskey="",key="",err="",restxt="";
-//"\t\u2606\tUser Manual:\n\u2605 ChatGPT даст API Key sk-xxx... https://platform.openai.com/account/api-keys\n\u2605 CLEAR берет прошлый API Key и очищает вопрос\n\u2605 Z00M удаляет служебную инфо ответа и увеличивает шрифт\n\u2605 Другая AI модель text-davinci-002 в https://api.openai.com/v1/engines/text-davinci-003/completions\n\u2605 Tokens 2023 вопроса/ответа max 40хх токен/слог\n\u2605 Temperature ответа 1>>0.5>>0-один ответ";
+//"\t\u2606\tUser Manual:\n\u2605 ChatGPT даст API Key sk-xxx... https://platform.openai.com/account/api-keys\n\u2605 CLEAR бе,рет прошлый API Key и очищает вопрос\n\u2605 Z00M удаляет служебную инфо ответа и увеличивает шрифт\n\u2605 Другая AI модель text-davinci-002 в https://api.openai.com/v1/engines/text-davinci-003/completions\n\u2605 Tokens 2023 вопроса/ответа max 40хх токен/слог\n\u2605 Temperature ответа 1>>0.5>>0-один ответ";
 
 float sz=15f;
-long p2,tt0,tt1;
+long p2;
 LocalDateTime t0,t1;
 
 String ver=System.getProperty("os.version");
@@ -98,10 +98,7 @@ task.execute(url);
 
 outputText.setTextSize(12f);
 outputText.setText("\tЖду GPT ответа...\n\n"+reskey);
-
-tt0=System.currentTimeMillis();
 if(vni>51)t0=LocalDateTime.now();
-
 }
 });
 
@@ -161,7 +158,16 @@ String temp=inputTemp.getText().toString();
 
 String url0=urlStr;
 
-String requestBody = "{\n"+"    \"prompt\": \""+txt+"\",\n"+"    \"temperature\": "+temp+",\n"+"    \"max_tokens\": "+tk+"\n" + "}";
+String requestBody = "{\n"+
+"\"model\": \""+"text-davinci-003"+"\",\n"+
+"\"prompt\": \""+txt+"\",\n"+"    \"max_tokens\": "+tk+",\n"+"    \"temperature\": "+temp+"\n" + "}";
+
+
+//"model": "text-davinci-003",
+//"prompt": "Say this is a test",
+//"max_tokens": 7,
+//"temperature": 0
+
 
 String apiKey=key;
 
@@ -186,7 +192,10 @@ in.close();
 
 return res.toString();}
 catch(IOException e)
-{return"Err: "+e.getMessage();}
+{err=e.toString();
+//outputText.setText(e.toString());
+return"Err: "+e.getMessage();
+ }
 }
 
 //Json output
@@ -201,8 +210,6 @@ restxt=choice.getString("text");
 
 }catch (Exception e) {e.printStackTrace();}  
 
-tt1=System.currentTimeMillis();
-p2=tt1-tt0;
 if(vni>51){t1=LocalDateTime.now();p2=ChronoUnit.MILLIS.between(t0,t1);}
 
 sz=15f;
