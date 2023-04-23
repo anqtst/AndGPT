@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="16dp">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="horizontal"
+android:layout_width="match_parent"
+android:layout_height="wrap_content">
+
+<EditText android:id="@+id/input_tk" android:layout_width="wrap_content" android:layout_height="wrap_content"
+android:gravity="center"
+android:text="2023"
+android:hint="~4000"/>
+
+<EditText android:id="@+id/input_temp" android:layout_width="wrap_content" android:layout_height="wrap_content"
+android:gravity="center"
+android:text="1"
+android:hint="0.7"/>
+
+<EditText android:id="@+id/input_key" android:layout_width="match_parent" android:layout_height="wrap_content"
+android:inputType="textPassword"
+android:text=""
+android:hint="> API Key sk-xxx..."/>
+
+</LinearLayout>
+
+<EditText android:id="@+id/input_url" android:layout_width="wrap_content" android:layout_height="wrap_content"
+android:gravity="right"
+android:inputType="textUri" android:text="https://api.openai.com/v1/engines/text-davinci-003/completions"
+android:hint="Введи URL AI API сайта"/>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="horizontal"
+android:layout_width="match_parent"
+android:layout_height="wrap_content">
+
+<Button android:id="@+id/btn_clr"
+android:layout_width="wrap_content" 
+android:layout_height="wrap_content"
+android:gravity="center"
+android:text="Clear"/>
+
+<Button android:id="@+id/btn_zm"
+android:layout_width="wrap_content" 
+android:layout_height="wrap_content"
+android:gravity="center"
+android:text="Zoom"/>
+
+<Button android:id="@+id/btn_fetch"
+android:layout_width="match_parent" 
+android:layout_height="wrap_content"
+android:gravity="center"
+android:text="ChatGPT"/>
+
+</LinearLayout>
+
+<EditText android:id="@+id/input_txt" android:layout_width="match_parent" android:layout_height="wrap_content"
+android:maxHeight="150dp"
+android:focusable="true"
+
+android:text="Введи API Key / Clear > old API Key"
+android:hint="Введи вопрос"/>
+
+<ScrollView android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<TextView 
+android:id="@+id/output_text" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Ответ ChatGPT появится здесь >>>\n\n\t\u2606\tUser Manual >>>\n\u2605 ChatGPT даст API Key sk-xxx... >>> https://platform.openai.com/account/api-keys\n\u2605 Clear > берет прошлый API Key и очищает вопрос\n\u2605 Zoom > удаляет служебную инфо ответа и увеличивает шрифт\n\u2605 Другая AI модель > text-davinci-002 >>> https://api.openai.com/v1/engines/text-davinci-003/completions\n\u2605 Tokens limit > 2023 слога >>> max ~4000 токен/слог\n\u2605 Temperature max > 1>>0.7>>>0 > один ответ"
+android:autoLink="web"
+android:editable="true"
+android:selectable="true"/>
+
+</ScrollView>
+</LinearLayout>
