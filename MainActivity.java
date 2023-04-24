@@ -38,7 +38,6 @@ Button btnFetch,btnClr,btnZm;
 TextView outputText;
 
 String res="",reskey="",key="",err="",restxt="";
-//"\t\u2606\tUser Manual:\n\u2605 ChatGPT даст API Key sk-xxx... https://platform.openai.com/account/api-keys\n\u2605 CLEAR берет прошлый API Key и очищает вопрос\n\u2605 Z00M удаляет служебную инфо ответа и увеличивает шрифт\n\u2605 Другая AI модель text-davinci-002 в https://api.openai.com/v1/engines/text-davinci-003/completions\n\u2605 Tokens 2023 вопроса/ответа max 40хх токен/слог\n\u2605 Temperature ответа 1>>0.5>>0-один ответ";
 
 float sz=15f;
 long p2,tt0,tt1;
@@ -46,6 +45,8 @@ LocalDateTime t0,t1;
 
 String ver=System.getProperty("os.version");
 int vni=(int)(System.getProperty("os.version").charAt(0));
+String mod="text-davinci-003",rB="";
+
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -161,7 +162,18 @@ String temp=inputTemp.getText().toString();
 
 String url0=urlStr;
 
+String f4L= url0.substring(0, 4);
+
 String requestBody = "{\n"+"    \"prompt\": \""+txt+"\",\n"+"    \"temperature\": "+temp+",\n"+"    \"max_tokens\": "+tk+"\n" + "}";
+
+if (!f4L.equals("http")) {mod=url0;
+url0="https://api.openai.com/v1/completions";
+requestBody = "{\n"+
+"\"model\": \""+mod+"\",\n"+
+"\"prompt\": \""+txt+"\",\n"+"    \"max_tokens\": "+tk+",\n"+"    \"temperature\": "+temp+"\n" + "}";
+}
+
+rB=requestBody;
 
 String apiKey=key;
 
@@ -186,7 +198,7 @@ in.close();
 
 return res.toString();}
 catch(IOException e)
-{return"Err: "+e.getMessage();}
+{err=e.toString();return"Err: "+e.getMessage();}
 }
 
 //Json output
@@ -208,7 +220,8 @@ if(vni>51){t1=LocalDateTime.now();p2=ChronoUnit.MILLIS.between(t0,t1);}
 sz=15f;
 outputText.setTextSize(sz);
 outputText.setTextIsSelectable(true);
-outputText.setText(restxt+"\n"+"\n << Time: "+p2+"ms "+t1+" >>\n\tOS > "+ver+"\t"+reskey+"\n"+err+"\n"+res);
+outputText.setText(restxt+"\n"+"\n << Time: "+p2+"ms "+t1+" >>\n\tOS > "+ver+"\n"+err+"\n\tRequest > Response >>>\n"+rB+"\n"+res+"\n\t"+reskey);
+err="";
 }
 }
 }
