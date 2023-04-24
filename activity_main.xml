@@ -10,25 +10,34 @@ android:orientation="horizontal"
 android:layout_width="match_parent"
 android:layout_height="wrap_content">
 
-<EditText android:id="@+id/input_tk" android:layout_width="wrap_content" android:layout_height="wrap_content"
+<EditText android:id="@+id/input_tk"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
 android:gravity="center"
-android:text="2023"
+android:text="100"
 android:hint="~4000"/>
 
-<EditText android:id="@+id/input_temp" android:layout_width="wrap_content" android:layout_height="wrap_content"
+<EditText android:id="@+id/input_temp"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
 android:gravity="center"
 android:text="1"
 android:hint="0.7"/>
 
-<EditText android:id="@+id/input_key" android:layout_width="match_parent" android:layout_height="wrap_content"
+<EditText android:id="@+id/input_key"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:focusable="true"
 android:inputType="textPassword"
 android:text=""
 android:hint="> API Key sk-xxx..."/>
 
 </LinearLayout>
 
-<EditText android:id="@+id/input_url" android:layout_width="wrap_content" android:layout_height="wrap_content"
-android:gravity="right"
+<EditText android:id="@+id/input_url"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:gravity="left"
 android:inputType="textUri" android:text="https://api.openai.com/v1/engines/text-davinci-003/completions"
 android:hint="Введи URL AI API сайта"/>
 
@@ -68,7 +77,10 @@ android:hint="Введи вопрос"/>
 android:layout_height="match_parent">
 
 <TextView 
-android:id="@+id/output_text" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Ответ ChatGPT появится здесь >>>\n\n\t\u2606\tUser Manual >>>\n\u2605 ChatGPT даст API Key sk-xxx... >>> https://platform.openai.com/account/api-keys\n\u2605 Clear > берет прошлый API Key и очищает вопрос\n\u2605 Zoom > удаляет служебную инфо ответа и увеличивает шрифт\n\u2605 Другая AI модель > text-davinci-002 >>> https://api.openai.com/v1/engines/text-davinci-003/completions\n\u2605 Tokens limit > 2023 слога >>> max ~4000 токен/слог\n\u2605 Temperature max > 1>>0.7>>>0 > один ответ"
+android:id="@+id/output_text"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Ответ ChatGPT появится здесь >>>\n\n\t\u2606\tUser Manual >>>\n\u2605 ChatGPT даст API Key sk-xxx... >>> https://platform.openai.com/account/api-keys\n\u2605 Clear > берет прошлый API Key и очищает вопрос\n\u2605 Zoom > удаляет служебную инфо ответа и увеличивает шрифт\n\u2605 Другая AI модель > text-davinci-002 >>> https://api.openai.com/v1/engines/text-davinci-003/completions\n\u2605 Новый URL AI модель > text-davinci-003 >>> https://api.openai.com/v1/completions \n\u2605 Tokens limit > 100 слов вопроса/ответа >>> max 40хх токен/слов\n\u2605 Temperature max > 1>>0.7>>>0 > один ответ"
 android:autoLink="web"
 android:editable="true"
 android:selectable="true"/>
