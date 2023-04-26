@@ -46,7 +46,9 @@ LocalDateTime t0,t1;
 String ver=System.getProperty("os.version");
 int vni=(int)(System.getProperty("os.version").charAt(0));
 String mod="text-davinci-003",rB="";
-
+String cur="",tks;
+String lst=mod;
+int tkc,tkll,tkl=100,a=0;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +100,7 @@ FetchWebsiteTask task = new FetchWebsiteTask();
 task.execute(url);
 
 outputText.setTextSize(12f);
-outputText.setText("\tЖду GPT ответа...\n\n"+reskey);
+outputText.setText("\tWait GPT...\n\n"+reskey);
 
 tt0=System.currentTimeMillis();
 if(vni>51)t0=LocalDateTime.now();
@@ -131,6 +133,9 @@ outputText.setText("\tOS > "+ver+"\t"+reskey);
 inputTxt.setText("");
 inputTxt.requestFocus();
 
+cur=inputUrl.getText().toString();
+inputUrl.setText(lst);lst=cur;
+
 }});
 
 //Zoom
@@ -142,6 +147,13 @@ sz=sz+1;
 outputText.setTextSize(sz);
 outputText.setTextIsSelectable(true);
 outputText.setText(restxt);
+
+tkc=Integer.parseInt(inputTk.getText().toString());
+inputTk.setText(Integer.toString(tkl));
+if(a==0){a=1;tkll=tkll+100;}else a=0;
+tkl=tkc+tkll*a;
+
+//String s = String.valueOf(i);
 
 }});
 }
