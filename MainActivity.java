@@ -73,7 +73,7 @@ restxt=outputText.getText().toString();
 //inputTxt.requestFocus();
 //inputKey.requestFocus();
 
-//Chatgpt button
+//ChatGPT button
 btnFetch.setOnClickListener(new View.OnClickListener() {
 @Override
 public void onClick(View v) {
@@ -104,6 +104,7 @@ outputText.setText("\tWait GPT...\n\n"+reskey);
 
 tt0=System.currentTimeMillis();
 if(vni>51)t0=LocalDateTime.now();
+btnFetch.setEnabled(false);
 
 }
 });
@@ -234,6 +235,8 @@ outputText.setTextSize(sz);
 outputText.setTextIsSelectable(true);
 outputText.setText(restxt+"\n"+"\n << Time: "+p2+"ms "+t1+" >>\n\tOS > "+ver+"\n"+err+"\n\tRequest > Response >>>\n"+rB+"\n"+res+"\n\t"+reskey);
 err="";
+
+btnFetch.setEnabled(true);
 }
 }
 }
