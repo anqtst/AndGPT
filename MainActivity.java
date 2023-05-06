@@ -46,9 +46,10 @@ LocalDateTime t0,t1;
 String ver=System.getProperty("os.version");
 int vni=(int)(System.getProperty("os.version").charAt(0));
 String mod="text-davinci-003",rB="";
-String cur="",tks;
+String cur="",tks,txt;
 String lst=mod;
-int tkc,tkll,tkl=100,a=0;
+int tkc,tkl=100,a=0;
+boolean x=true;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +119,7 @@ try
  {
 BufferedReader bR=new BufferedReader(new InputStreamReader(new FileInputStream(new File(getFilesDir(),"apikey.txt"))));
 String sk0=bR.readLine();bR.close();
-if(sk0!=null)key=sk0;
+if(sk0!=null){key=sk0;inputKey.setText(key);}
  }
 catch (IOException e)
 {
@@ -137,6 +138,9 @@ inputTxt.requestFocus();
 cur=inputUrl.getText().toString();
 inputUrl.setText(lst);lst=cur;
 
+//outputText.setTextSize(15f);
+sz=15f;
+
 }});
 
 //Zoom
@@ -144,16 +148,19 @@ btnZm.setOnClickListener(new View.OnClickListener() {
 @Override
 public void onClick(View v) {
 
-sz=sz+1;
-outputText.setTextSize(sz);
-outputText.setTextIsSelectable(true);
-outputText.setText(restxt);
-
 tkc=Integer.parseInt(inputTk.getText().toString());
 inputTk.setText(Integer.toString(tkl));
-if(a==0){a=1;tkll=tkll+100;}else a=0;
-tkl=tkc+tkll*a;
+if(x)tkl=tkc+100;else tkl=tkc;
+x=!x;
 
+//sz=sz+1;
+if(sz==25f)sz=6f;
+outputText.setTextSize(sz);
+outputText.setTextIsSelectable(true);
+outputText.setText(
+//tkc+"+"+a+"x100="+tkl+"\n"+
+restxt);
+sz=sz+1;
 //String s = String.valueOf(i);
 
 }});
@@ -233,10 +240,11 @@ if(vni>51){t1=LocalDateTime.now();p2=ChronoUnit.MILLIS.between(t0,t1);}
 sz=15f;
 outputText.setTextSize(sz);
 outputText.setTextIsSelectable(true);
-outputText.setText(restxt+"\n"+"\n << Time: "+p2+"ms "+t1+" >>\n\tOS > "+ver+"\n"+err+"\n\tRequest > Response >>>\n"+rB+"\n"+res+"\n\t"+reskey);
+outputText.setText("Yours > "+inputTxt.getText().toString()+"\nChatGPT >>> "+restxt+"\n"+"\n << Time: "+p2+"ms "+t1+" >>\n\tOS > "+ver+"\n"+err+"\n\tRequest > Response >>>\n"+rB+"\n"+res+"\n\t"+reskey);
 err="";
 
 btnFetch.setEnabled(true);
+//tkc=tkl=100;
 }
 }
 }
